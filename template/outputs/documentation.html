@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<link rel="stylesheet" href="/static_files/styles/gtt_lab_styles.css" type="text/css" media="all" charset="utf-8">
+		<title>Tartaglia Lab Web Servers: catRAPID</title>
+	</head>
+
+	<body>
+
+		<div id="topbar">
+			<div id="home_panel">
+			<p><a href="../index.html">Portal Home</a></p>
+			</div>
+			<div id="title_server">
+				<h1><i>cat</i>RAPID</h1>
+			</div>
+			<div id="navbar_server">
+				<h3>[ Home - Documentation - Tutorial ]</h3>
+			</div>
+		</div>
+		<div id="welcome_docs">
+			
+			<div id="left_column">
+			<img src="/static_files/algorithms/catrapid_alpha/images/catrapid-logo.png">
+			</div>
+			
+			<div id="right_column">
+				<h2>About the <i>cat</i>RAPID algorithm</h2>
+				<br>
+				<p>RNA plays a fundamental role inside the cell.  The experimental determination of ribonucleoprotein (RNP) complexes is a slow and difficult process and the number of experimentally determined structures of RNP complexes is still rather scarce. In this view, computational predictions of RNP complex structures would greatly help studying protein–RNA interactions and investigate their molecular function. To this purpose, we developed catRAPID, an algorithm to facilitate the identification of protein-RNA interactions. Through the calculation of secondary structure, hydrogen bonding and van der Waals contributions, catRAPID is able predict protein-RNA interaction propensities with great accuracy (up to 89% on the ncRNA-protein interaction database, NPinter).
+				</p>
+				<br>
+				<h4>Interaction propensity</h4>
+				<br>
+				<p>In catRAPID, the contributions of secondary structure, hydrogen bonding and van der Waals are combined together into the <em>interaction profile</em>:</p>
+				<br>
+					<div id="docs_image">
+					<img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs1.png">
+					<br>
+					</div>
+				<br>
+				<p>where <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs2.png"> indicates the physico-chemical profile of a property <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs3.png"> calculated for each amino acid (nucleotide) starting from the N-terminus (5’). The hydrogen bonding profile, denoted by <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs4.png">, is the hydrogen bonding ability of each amino acid (nucleotide) in the sequence:</p>
+				<br>
+					<div id="docs_image">
+					<img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs5.png">
+					<br>
+					</div>
+				<br>
+				<p>Similarly, <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs6.png"> represents the secondary structure occupancy profile and <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs7.png"> the van der Waals profile. The variable  x indicates RNA (x = r) or protein  (x = p) profiles. Secondary structure, hydrogen bonding and van der Waals contributions are calculated as described in the <i>cat</i>RAPID manuscript [Bellucci <i>et al.</i>, 2011]. In particular, the RNA secondary structure is predicted from sequence using the Vienna package [ref?] including the algorithms <em>RNAfold</em>, <em>RNAsubopt</em> and <em>RNAplot</em>. Model structures, ranked by energy, are used as input for catRAPID. For each model structure, the <em>RNAplot</em> algorithm is employed to generate secondary structure coordinates. Using the coordinates we define the secondary structure occupancy by counting the number of contacts within the nucleotide chain. High values of secondary structure occupancy indicate that base pairing occurs in regions with high propensity to form stems, while low values are associated with junctions or multi-loops.</p>
+				<br>
+				<p>We employ discrete Fourier transform to compare interaction profiles of different length:</p>
+				<br>
+					<div id="docs_image">
+					<img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs8.png">
+					<br>&nbsp;
+					</div>
+				<br>
+				<p>Where the number of coefficients is <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs9.png">.
+				The interaction propensity <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs10.png"> is defined as the inner product between the protein propensity profile <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs11.png"> and the RNA propensity profile <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs12.png"> weighted by the interaction matrix <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs13.png">:</p>
+					<br>
+					<div id="docs_image">
+					<img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs14.png">
+					<br>&nbsp;
+					</div>
+				<p>The interaction matrix <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs13.png"> as well as the parameters  <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs15.png">, <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs16.png"> and <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs17.png"> are derived under the condition that interaction propensities <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs10.png"> take maximal values for associations present in the positive training set (and minimal values for those in the negative training set):</p>
+		
+					<br>
+					<div id="docs_image">
+					<img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs19.png">
+					<br><br><br>
+					</div>	
+					<br>
+					<p>The discriminative power measures the interaction propensity of a protein-RNA pair with respect to the training sets.</p>
+					<br>
+					<h4>Interaction strength</h4>
+					<br>
+					<p>
+					For each protein-RNA pair under investigation, we use a reference set of 10<sup>2</sup> protein and 10<sup>2</sup> RNA molecules (the number of sequences is chosen to guarantee sufficient statistical sampling). To assess the strength of a particular association, we compute the interaction propensity <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs10.png"> and compare it with the interaction propensities <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs20.png"> of the reference set (total of 104 protein-RNA pairs). Using the interaction propensity distribution of the reference set, we generate the <em>interaction score</em>:
+					</p>
+					<br>
+					<div id="docs_image">
+					<img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs21.png">
+					<br><br><br><br><br><br>&nbsp;
+					</div>
+					<p>
+					The number of interactions is <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs22.png">. From the distribution of interaction propensities we compute the <em>interaction strength</em>:
+					</p>
+					<br>
+					<div id="docs_image">
+					<img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs23.png">
+					<br>&nbsp;
+					</div>
+					<p>
+					In our calculations we employ random associations between polypeptide and nucleotide sequences. Since little interaction propensities are expected from these random associations, the reference set represents a <em>negative control</em>. Reference sequences have the same lengths as the pair of interest to guarantee that the interaction strength is independent of protein and RNA lengths. The interaction strength ranges from 0% (non-interacting) to 100% (interacting). Interaction strengths above 50% indicate propensity to bind. The <em>RNA interaction strength</em> and the <em>protein interaction strength</em> are special cases of the interaction strength in which the reference set is generated using only RNA or protein sequences.
+					</p>
+					<br>
+					<h4>Interaction Fragments</h4>
+					<br>
+					<p>
+					When protein or RNA sequences exceed the size compatible with our computational requirements and catRAPID could not be used to calculate the interaction propensity.  To overcome this limitation, we developed a procedure called <em>fragmentation</em>, which involves division of polypeptide and nucleotide sequences into fragments followed by prediction of the interaction propensities.
+					</p><br>
+					<p><strong>The "long RNA" option</strong>: The use of RNA fragments is introduced to identify RNA regions involved in protein binding. The RNALfold algorithm from the <a href="www.tbi.univie.ac.at/RNA/" target="_blank">Vienna package</a><img src="/static_files/algorithms/catrapid_alpha/images/external_link.png" alt="link"> is employed to select RNA fragments in the range 100-200 nt with predicted stable secondary structure.  Secondary structure stabilities are estimated by calculating the RNA free energy predicted by RNALfold. As long RNA segments have lower free energy for the higher number of bases that can be paired, the choice of segments in the range of 100-200 nt is optimal because it allows simultaneously: a) selection of secondary structures with comparable free energy b) high sequence coverage (>90%) for long transcripts such as Xist. Once the RNA fragments are selected, catRAPID is employed to predict their ability to bind to polypeptide chains. Conceptually, the interaction fragments algorithm is a variant of the RNA interaction strength algorithm that allows identification of putative binding areas in long sequences. If the exact protein and/or RNA domains are known, we recommend the use of the interaction strength method to predict the binding specificity.
+					</p><br>
+					<p><strong>The “protein-RNA” option</strong>: The analysis of fragments is particularly useful to identify regions involved in the binding. The fragmentation approach is based on the division of protein and RNA sequences into overlapping segments:</p>
+					<br>
+					 <div id="docs_image">
+					 <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs24.png">
+					 <br><br><br><br><br><br>&nbsp;
+					 </div>	
+					 <p>
+					 Where <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs25.png">, <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs26.png">, and <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs27.png"> indicate the position of fragments, f is their length and l is the overall sequence length. The number of total fragments is <img src="/static_files/algorithms/catrapid_alpha/images/catrapid_docs28.png"> (limited by catRAPID sequence restrictions). The maximum number of protein-RNA interactions is 104, which implies that the ability to identify an experimentally validated interaction by chance is 10-4. The list of all the protein-RNA fragment associations is called interaction map.  Protein and RNA interaction profiles are bi-dimensional projections of the interaction map onto the protein or RNA positions, respectively.</p>	
+					 <br>
+			</div>
+			<br><br>
+
+
+		</div>
+		<div id="footer_docs" align="center">
+			<hr>
+			<p>&copy; 2012 - <a href="http://">Gene Function and Evolution</a> - <a href="http://">Center for Genomic Regulation (CRG)</a></p>
+		</div>
+	
+	</body>
+	
+</html>

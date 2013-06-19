@@ -1,0 +1,47 @@
+/* tables */table.tablesorter {	font-size: 9pt;	width:900px;	text-align: center;	border-right:1px solid #c6d5e1;	border-top:1px solid #c6d5e1;	border-bottom:none;	margin-left:auto;	margin-right:auto;}table.tablesorter thead tr th {	background-image: url(images/header-bg.gif);	background-repeat: repeat;/* 	background: rgb(196,3,0);	background: -moz-linear-gradient(top,  rgba(196,3,0,1) 0%, rgba(209,81,77,1) 54%);	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(196,3,0,1)), color-stop(54%,rgba(209,81,77,1)));	background: -webkit-linear-gradient(top,  rgba(196,3,0,1) 0%,rgba(209,81,77,1) 54%);	background: -o-linear-gradient(top,  rgba(196,3,0,1) 0%,rgba(209,81,77,1) 54%);	background: -ms-linear-gradient(top,  rgba(196,3,0,1) 0%,rgba(209,81,77,1) 54%);	background: linear-gradient(to bottom,  rgba(196,3,0,1) 0%,rgba(209,81,77,1) 54%);	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c40300', endColorstr='#d1514d',GradientType=0 ); */	text-align:left; 	color:#cfdce7;	border:1px solid #fff;	border-right:none;}table.tablesorter thead tr h3 {	font-size:12px;	padding:6px 6px 4px 8px;	line-height: 12px;	font-weight: bold;	margin-top: 1px;}table.tablesorter tbody td {	color: black;	padding:6px 6px 4px 8px;		border-bottom:1px solid #c6d5e1;	border-left:1px solid #c6d5e1;}table.tablesorter thead tr .header h3 {	background: url(images/sort.gif) 7px center no-repeat;	padding-left:18px;	cursor: pointer;}table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {	background-image: url(images/header-selected-bg.gif);	background-repeat: repeat;/* 	background: rgb(165,0,0); 	background: -moz-linear-gradient(top,  rgba(165,0,0,1) 0%, rgba(188,69,69,1) 54%); 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(165,0,0,1)), color-stop(54%,rgba(188,69,69,1))); 	background: -webkit-linear-gradient(top,  rgba(165,0,0,1) 0%,rgba(188,69,69,1) 54%); 	background: -o-linear-gradient(top,  rgba(165,0,0,1) 0%,rgba(188,69,69,1) 54%); 	background: -ms-linear-gradient(top,  rgba(165,0,0,1) 0%,rgba(188,69,69,1) 54%); 	background: linear-gradient(to bottom,  rgba(165,0,0,1) 0%,rgba(188,69,69,1) 54%); 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a50000', endColorstr='#bc4545',GradientType=0 ); */}table.tablesorter thead tr .headerSortUp h3 {	background: url(images/asc.gif) 7px center;	background-repeat: no-repeat;	padding-left:18px;	cursor: pointer;}table.tablesorter thead tr .headerSortDown h3 {	background: url(images/desc.gif) 7px center;	background-repeat: no-repeat;	padding-left:18px;	cursor: pointer;}.NormRow { background-color: #fff; }.AltRow  { background-color: #ecf2f6; }/*  .sortable {width:900px; border-left:1px solid #c6d5e1; border-top:1px solid #c6d5e1; border-bottom:none; margin-left:auto; margin-right:auto;}
+.sortable th {background:url(images/header-bg.gif); text-align:left; color:#cfdce7; border:1px solid #fff; border-right:none}
+.sortable th h3 {font-size:12px; padding:6px 6px 4px 8px;line-height: 12px;	font-weight: bold;	margin-top: 1px;}
+.sortable td {padding:6px 6px 4px 8px; border-bottom:1px solid #c6d5e1; border-right:1px solid #c6d5e1; font-size:12px;}
+.sortable .head h3 {background:url(images/sort.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
+.sortable .desc, .sortable .asc {background:url(images/header-selected-bg.gif)}
+.sortable .desc h3 {background:url(images/desc.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
+.sortable .asc h3 {background:url(images/asc.gif) 7px  center no-repeat; cursor:pointer; padding-left:18px}
+.sortable .head:hover, .sortable .desc:hover, .sortable .asc:hover {color:#fff}
+.sortable .evenrow td {background:#fff}
+.sortable .oddrow td {background:#ecf2f6}
+.sortable td.evenselected {background:#ecf2f6}
+.sortable td.oddselected {background:#dce6ee} */
+#controls {width:980px; margin:0 auto; height:20px}
+#perpage {float:left; width:200px}
+#perpage select {float:left; font-size:11px}
+#perpage span {float:left; margin:2px 0 0 5px}
+#navigation {float:left; width:580px; text-align:center}
+#navigation img {cursor:pointer}
+#text {float:left; width:200px; text-align:right; margin-top:2px}
+
+p 
+{ 
+	color: #666; 
+	font-size: 16px; 
+	font-weight: normal; 
+	text-align: justify;
+	margin-top: 8px;
+}
+
+h4 
+{ 
+	color: #BF0000;
+	font-size: 16px;
+	font-style: normal;
+	text-align: left;
+	font-weight: lighter;
+	clear: both;
+	margin-top: 4px;
+
+}
+
+#welcome_server img.output {
+	float:  none;
+    margin-left: auto;
+    margin-right: auto; 
+}
