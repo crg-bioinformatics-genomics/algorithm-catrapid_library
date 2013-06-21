@@ -1,6 +1,6 @@
 ---
 title:      Protein and Transcript library generator
-name:       library
+name:       catrapid_library
 title_styled:   >
     catLib - Protein and Transcript library generator
 version:    1.0
