@@ -91,7 +91,8 @@ p.communicate()
 
 if p.returncode == 0:
 	TMP_PATH = SCRIPT_PATH+ "/tmp/"+ random_number+"/outputs/"
-		
+	with open(os.path.join(WORKER_PATH,"link.txt"), 'r') as l:
+  		myLink = l.readline()	
 	dirList=os.listdir(TMP_PATH)
 	for file in dirList:
 		shutil.copyfile(TMP_PATH+file, OUTPUT_PATH+file)
@@ -121,6 +122,7 @@ if p.returncode == 0:
 		   "DatasetA": (""" "{}" """.format(args.fileA[0])).split("/")[5].split("\"")[0],
 		   "randoms" : random_number,
 		   "generated" : str(datetime.datetime.now()),
+		   "link_to_omics" : myLink
 	   }
 	)
 	
