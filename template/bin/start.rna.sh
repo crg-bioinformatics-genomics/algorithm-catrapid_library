@@ -4,11 +4,11 @@ echo $2 | sed 's/T/U/g' | tr [a-z] [A-Z] | awk '{print "'$1'", $1}' > ./database
 cp  ./database/rna.50.3000.txt  ./database/rna.txt
   
 # computes 10 features (concatenated) secondary + polarity + hydro for rna and proteins
-sh rna-feature.sh        ./database/rna.50.3000.txt       > ./database/rna.dat
+bash rna-feature.sh        ./database/rna.50.3000.txt       > ./database/rna.dat
 
 # normalizes the lengths
-sh adaptator.sh           ./database/rna.dat 3001         > ./database/rna.3000.dat
+bash adaptator.sh           ./database/rna.dat 3001         > ./database/rna.3000.dat
 
 # computes fouriers' coefficients
-sh fourier.line.fast.sh    ./database/rna.3000.dat   | awk '(NF==53)&&($2!=0)'
+bash fourier.line.fast.sh    ./database/rna.3000.dat   | awk '(NF==53)&&($2!=0)'
 

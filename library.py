@@ -22,7 +22,7 @@ def copyfolder(src, dst):
         else: raise
         
 # read the task definition yaml file
-with open(os.path.join(SCRIPT_PATH, "library.yaml"), "r") as task_f:
+with open(os.path.join(SCRIPT_PATH, "catrapid_library.yaml"), "r") as task_f:
     task_definition = yaml.load(task_f)
 
 parser = argparse.ArgumentParser(

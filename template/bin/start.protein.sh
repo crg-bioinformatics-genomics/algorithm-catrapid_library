@@ -20,14 +20,6 @@
 
 #!/bin/bash
 
-if [ -z $CATR_HOME ]; then 
-  BIN_PATH=`which start.modified.sh`
-  BIN_PATH=`dirname $BIN_PATH`
-  export CATR_HOME=$BIN_PATH/..
-fi
-
-
-
 # takes the sequences (label - sequence)
 echo $2 |  tr [a-z] [A-Z] | awk '(length($1)<750)&&(length($1)>=5){print "'$1'", $1}' > ./database/protein.50.750.txt 
 cp ./database/protein.50.750.txt ./database/protein.txt
@@ -35,15 +27,15 @@ cp ./database/protein.50.750.txt ./database/protein.txt
   
 # computes 10 features (concatenated) secondary + polarity + hydro for rna and proteins
 #sh rna-feature.sh        ./database/rna.50.3000.txt       > ./database/rna.dat
-sh protein-feature.sh    ./database/protein.50.750.txt   > ./database/protein.dat
+bash protein-feature.sh    ./database/protein.50.750.txt   > ./database/protein.dat
 
 # normalizes the lengths
 #sh adaptator.sh           ./database/rna.dat 3001         > ./database/rna.3000.dat
-sh adaptator.sh        ./database/protein.dat 751      > ./database/protein.750.dat
+bash adaptator.sh        ./database/protein.dat 751      > ./database/protein.750.dat
 
 # computes fouriers' coefficients
 #sh fourier.line.fast.sh    ./database/rna.3000.dat   | awk '(NF==53)&&($2!=0)'   
-sh fourier.line.fast.sh     ./database/protein.750.dat    | awk '(NF==53)&&($2!=0)' 
+bash fourier.line.fast.sh     ./database/protein.750.dat    | awk '(NF==53)&&($2!=0)' 
 
 #  > ./database/fourier.protein.750.dat
 # > ./database/fourier.rna.3000.dat

@@ -16,9 +16,9 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -1000 | sed 's/>//g'`;
 	name=`echo $1 | sed 's/\.txt//g;s/\.oneline//g' | awk '{print $1}'`
 
 	bash start.protein.sh $i2 $si2 > out.tmp 
-	
+
 	entries=`wc -l out.tmp | awk '{print $1}'`
-	
+
 	if [[ "$entries" -eq 10 ]]; then
 		cat out.tmp >> $name.prot.lib
 		rm out.tmp
@@ -26,11 +26,13 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -1000 | sed 's/>//g'`;
 		echo "$i2" >> not_calculated.txt
 		rm out.tmp
 	fi
-	
+
 done
 
 if [[ -s "$name.prot.lib" ]]; then
 	mv $name.prot.lib ./outputs/library.lib
+else
+	touch ./outputs/library.lib
 fi
 mv not_calculated.txt ./outputs/not_calculated.txt
 

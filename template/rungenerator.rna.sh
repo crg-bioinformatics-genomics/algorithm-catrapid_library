@@ -16,9 +16,9 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -1000 | sed 's/>//g'`;
 	name=`echo $1 | sed 's/\.txt//g;s/\.oneline//g' | awk '{print $1}'`
 
 	bash start.rna.sh $i2 $si2 > out.tmp 
-	
-	entries =`wc -l out.tmp | awk '{print $1}'`
-	
+
+	entries=`wc -l out.tmp | awk '{print $1}'`
+
 	if [[ "$entries" -eq 10 ]]; then
 		cat out.tmp >> $name.rna.lib
 		rm out.tmp
@@ -29,8 +29,10 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -1000 | sed 's/>//g'`;
 
 done
 
-if [[ -s "$name.prot.lib" ]]; then
+if [[ -s "$name.rna.lib" ]]; then
 	mv $name.rna.lib ./outputs/library.lib
+else
+	touch ./outputs/library.lib
 fi
 mv not_calculated.txt ./outputs/not_calculated.txt
 
