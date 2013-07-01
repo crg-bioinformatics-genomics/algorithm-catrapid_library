@@ -91,7 +91,7 @@ p.communicate()
 
 if p.returncode == 0:
 	TMP_PATH = SCRIPT_PATH+ "/tmp/"+ random_number+"/outputs/"
-	with open(os.path.join(WORKER_PATH,"link.txt"), 'r') as l:
+	with open(os.path.join(TMP_PATH,"link.txt"), 'r') as l:
   		myLink = l.readline()	
 	dirList=os.listdir(TMP_PATH)
 	for file in dirList:
