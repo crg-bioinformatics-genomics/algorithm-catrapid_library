@@ -10,12 +10,12 @@ cd   tmp/$1
 	else
 		if [[ "$rna" -eq 0 ]]; then 
 			bash rungenerator.rna.sh "$2"
-			echo "http://s.tartaglialab.com/prefills/catrapid_omics_protein/$1" > link.txt
+			echo "http://s.tartaglialab.com/prefills/catrapid_omics_protein/$1" > outputs/link.txt
 		fi
 	
 		if [[ "$prot" -eq 0 ]]; then
 			bash rungenerator.protein.sh "$2"
-			echo "http://s.tartaglialab.com/prefills/catrapid_omics_transcript/$1" > link.txt
+			echo "http://s.tartaglialab.com/prefills/catrapid_omics_transcript/$1" > outputs/link.txt
 		fi
 	fi
 		
