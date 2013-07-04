@@ -18,5 +18,5 @@ cd   tmp/$1
 			echo "http://s.tartaglialab.com/prefills/catrapid_omics_transcript/$1" > link.txt
 		fi
 	fi
-		
+	
 cd ..
