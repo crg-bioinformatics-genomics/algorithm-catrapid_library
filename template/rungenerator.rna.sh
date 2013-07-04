@@ -30,9 +30,9 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -1000 | sed 's/>//g'`;
 done
 
 if [[ -s "$name.rna.lib" ]]; then
-	mv $name.rna.lib ./outputs/library.lib
+	mv $name.rna.lib ./outputs/custom.lib
 else
-	touch ./outputs/library.lib
+	touch ./outputs/custom.lib
 fi
 mv not_calculated.txt ./outputs/not_calculated.txt
 

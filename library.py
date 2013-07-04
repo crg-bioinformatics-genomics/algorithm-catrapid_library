@@ -68,7 +68,7 @@ def validate_prot(seq, alphabet=protein):
     leftover = set(seq.upper()) - alphabet
     return not leftover
 
-
+shutil.copyfile(args.fileA[0], TMP_PATH+"/outputs/custom.fasta")
 
 input_handle = open(args.fileA[0], "rU")
 fastaSeq = (record for record in SeqIO.parse(input_handle, "fasta"))
