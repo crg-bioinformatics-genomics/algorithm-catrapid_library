@@ -22,6 +22,7 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -1000 | sed 's/>//g'`;
 	if [[ "$entries" -eq 10 ]]; then
 		cat out.tmp >> $name.prot.lib
 		rm out.tmp
+		echo "$i2" "$si2" >> sequences.txt
 	else
 		echo "$i2" >> not_calculated.txt
 		rm out.tmp
@@ -31,8 +32,10 @@ done
 
 if [[ -s "$name.prot.lib" ]]; then
 	mv $name.prot.lib ./outputs/library.lib
+	mv sequences.txt ./outputs/sequences.txt
 else
 	touch ./outputs/library.lib
+	touch ./outputs/sequences.txt
 fi
 mv not_calculated.txt ./outputs/not_calculated.txt
 
