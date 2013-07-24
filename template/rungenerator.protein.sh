@@ -49,12 +49,12 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -100 | sed 's/>//g'`; 
 			else
 				echo "$i2" >> not_calculated.txt
 			fi
-
+			
+			rm RNAdom.list DNAdom.list
+			
 		else
 			echo "$i2" >> not_calculated.txt
 		fi
-
-		rm RNAdom.list DNAdom.list
 
 	else
 		echo "$i2" >> not_calculated.txt
