@@ -8,13 +8,13 @@ touch not_calculated.txt
 PATH=$PATH\:./bin/ ; export PATH
 
 # run cases one by one
-for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -100 | sed 's/>//g'`; do 
+for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`; do 
 
 	si2=`grep -w $i2 $1 | awk '(NF==2){print $2}'`
 
 	name=`echo $1 | sed 's/\.txt//g;s/\.oneline//g' | awk '{print $1}'`
 
-	if [[ "${#si2}" -ge 50 && "${#si2}" -le 1200 ]]; then
+	if [[ "${#si2}" -ge 50 && "${#si2}" -le 1200 && `wc -l sequences.txt | awk '{print $1}'` -le 500 ]]; then
 
 		bash start.rna.sh $i2 $si2 > out.tmp 
 
