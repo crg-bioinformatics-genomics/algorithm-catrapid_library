@@ -104,7 +104,7 @@ if p.returncode == 0:
 	
 	settings.configure(TEMPLATE_DIRS=(os.path.join(SCRIPT_PATH,'./')), DEBUG=True, TEMPLATE_DEBUG=True)
 	
-	if os.stat("library.lib")[6]==0:
+	if os.stat(OUTPUT_PATH+"library.lib")[6]==0:
 		myIndex="index.no_library.html"
 	else:
 		myIndex="index.library.html"

@@ -1,6 +1,4 @@
 #!/bin/bash
-set -o pipefail
-
 mkdir ./tmp
 mkdir ./results
 mkdir ./database
