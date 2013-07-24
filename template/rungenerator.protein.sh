@@ -3,18 +3,18 @@ mkdir ./tmp
 mkdir ./results
 mkdir ./database
 
-touch not_calculated.txt
+touch not_calculated.txt sequences.txt
 cc iupred.c -o iupred
 
 # remembers path
 PATH=$PATH\:./bin/ ; export PATH
 
 # run cases one by one
-for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -100 | sed 's/>//g'`; do
+for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -10000 | sed 's/>//g'`; do
 
 	si2=`grep -w -m1 "$i2" $1 | awk '(NF==2){print $2}'`
 
-	if [[ "${#si2}" -ge 50 && "${#si2}" -lt 750 ]]; then
+	if [[ "${#si2}" -ge 50 && "${#si2}" -lt 750 && `wc -l sequences.txt | awk '{print $1}'` -le 100 ]]; then
 
 		echo ">"$i2 $si2 > input_sequence.oneline
 		echo ">"$i2 > input_sequence.fasta
