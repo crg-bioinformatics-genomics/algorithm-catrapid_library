@@ -9,7 +9,6 @@ cc iupred.c -o iupred
 # remembers path
 PATH=$PATH\:./bin/ ; export PATH
 
-
 # run cases one by one
 for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -100 | sed 's/>//g'`; do
 

@@ -12,17 +12,17 @@ description_short:    >
     
 nav_links:
     -   title:  >
-            catLib Home
+            catLibrary Home
         href:   >
-            http://service.tartaglialab.com/new_submission/library   
+            http://service.tartaglialab.com/new_submission/catrapid_library   
     -   title:  >
             Documentation
         href:   >
-            http://service.tartaglialab.com/static_files/shared/documentation.html#4        
+            http://service.tartaglialab.com/static_files/shared/documentation.html        
     -   title:  >
             Tutorial
         href:   >
-            http://service.tartaglialab.com/static_files/shared/tutorial.html        
+            http://service.tartaglialab.com/static_files/shared/tutorial.html#2    
     -   title:  >
             Group page @ CRG
         href:   >
@@ -40,7 +40,7 @@ form_fields:
 
 file_uploads:    
     -   filename: A.fasta
-        description: Upload a set of sequences (FASTA format)
+        description: Upload a set of sequences (max 100 - FASTA format)
         format: fasta
         required: Yes        
 
