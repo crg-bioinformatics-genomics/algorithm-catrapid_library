@@ -104,8 +104,13 @@ if p.returncode == 0:
 	
 	settings.configure(TEMPLATE_DIRS=(os.path.join(SCRIPT_PATH,'./')), DEBUG=True, TEMPLATE_DEBUG=True)
 	
+	if os.stat("library.lib")[6]==0:
+		myIndex="index.no_library.html"
+	else:
+		myIndex="index.library.html"
+	
 	# read the template file into a variable
-	with open(os.path.join(SCRIPT_PATH, "index.library.html"), "r") as template_file:
+	with open(os.path.join(SCRIPT_PATH, myIndex), "r") as template_file:
 	   template_string = "".join(template_file.readlines())
 	
 	import datetime
