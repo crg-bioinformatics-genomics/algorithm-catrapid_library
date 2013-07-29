@@ -40,7 +40,7 @@ form_fields:
 
 file_uploads:    
     -   filename: A.fasta
-        description: Upload a set of sequences (max 100 - FASTA format)
+        description: Upload a set of sequences (max 500 - FASTA format)
         format: fasta
         required: Yes        
 
