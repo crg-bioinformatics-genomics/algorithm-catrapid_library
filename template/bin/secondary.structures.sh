@@ -2,7 +2,7 @@ cp ./$1 ./tmp/seq.txt
 
 # creates $2 models
 
-RNAsubopt -e 1 -s < ./tmp/seq.txt | head -10 | sort -n -k 2 | awk '{print $1}' > ./results/out
+./bin/RNAsubopt -e 1 -s < ./tmp/seq.txt | head -10 | sort -n -k 2 | awk '{print $1}' > ./results/out
 
 #
 for((ix=2;ix<=$2+1;ix++))
@@ -10,7 +10,7 @@ do
 awk '((NR==1)||NR=='$ix')' ./results/out > ./results/3.out
 
 # generates the coordinates
-RNAplot -o xrna < ./results/3.out
+./bin/RNAplot -o xrna < ./results/3.out
 # cleans the file
 awk '(NR>4)' rna.ss   > ./results/clean.txt;
 
