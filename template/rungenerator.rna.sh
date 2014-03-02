@@ -10,7 +10,7 @@ PATH=$PATH\:./bin/ ; export PATH
 # run cases one by one
 for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`; do 
 
-	si2=`grep -w $i2 $1 | awk '(NF==2){print $2}'`
+	si2=`grep -w $i2 $1 | awk '(NF==2){gsub(/[Uu]/, "T", $2); print toupper($2)}'`
 
 	name=`echo $1 | sed 's/\.txt//g;s/\.oneline//g' | awk '{print $1}'`
 
