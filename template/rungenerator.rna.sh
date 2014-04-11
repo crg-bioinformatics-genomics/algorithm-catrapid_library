@@ -3,7 +3,7 @@ mkdir ./tmp
 mkdir ./results
 mkdir ./database
 
-touch not_calculated.txt
+touch not_calculated.txt sequences.txt
 # remembers path
 PATH=$PATH\:./bin/ ; export PATH
 
@@ -14,16 +14,28 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 
 	name=`echo $1 | sed 's/\.txt//g;s/\.oneline//g' | awk '{print $1}'`
 
-	if [[ "${#si2}" -ge 50 && "${#si2}" -le 1200 && `wc -l sequences.txt | awk '{print $1}'` -le 500 ]]; then
+	if [[ "${#si2}" -lt 50 || `wc -l sequences.txt | awk '{print $1}'` -gt 500 ]]; then 
+		
+		echo "$i2" >> not_calculated.txt
 
-		bash start.rna.sh $i2 $si2 > out.tmp 
+	elif [[ "${#si2}" -gt 1200 ]]; then 
+
+		bash start.fragment.sh "$i2" "$si2" >> "$name".frag.rna.lib
+		
+		for fr in `awk '{print $1}' "$name.frag.rna.lib" | grep "$i2""_" | uniq`; do
+			grep -m1 -w "$fr" tmp/rna.frags >> "$name".frag.txt
+		done
+
+	else
+	
+		bash start.rna.sh "$i2" "$si2" > out.tmp 
 
 		if [[ -s "out.tmp" ]]; then
 
 			entries=`wc -l out.tmp | awk '{print $1}'`
 
 			if [[ "$entries" -eq 10 ]]; then
-				cat out.tmp >> $name.rna.lib
+				cat out.tmp >> "$name".rna.lib
 				rm out.tmp
 				echo "$i2" "$si2" >> sequences.txt
 			else
@@ -33,14 +45,17 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 		else
 			echo "$i2" >> not_calculated.txt
 		fi
-	else
-		echo "$i2" >> not_calculated.txt
 	fi
+
 done
 
 if [[ -s "$name.rna.lib" ]]; then
-	mv $name.rna.lib ./outputs/library.lib
+	mv "$name".rna.lib ./outputs/library.lib
 	mv sequences.txt ./outputs/sequences.txt
+	if [[ -s "$name.frag.rna.lib" ]]; then
+		mv "$name".rna.lib ./outputs/library.frag.lib
+		mv "$name".frag.txt ./outputs/sequences.frag.txt
+	fi
 else
 	touch ./outputs/library.lib
 	touch ./outputs/sequences.txt
