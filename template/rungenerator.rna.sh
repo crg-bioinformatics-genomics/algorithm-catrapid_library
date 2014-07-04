@@ -3,6 +3,8 @@ mkdir ./tmp
 mkdir ./results
 mkdir ./database
 
+myMAX=$2
+
 touch not_calculated.txt sequences.txt
 # remembers path
 PATH=$PATH\:./bin/ ; export PATH
@@ -14,7 +16,7 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 
 	name=`echo $1 | sed 's/\.txt//g;s/\.oneline//g' | awk '{print $1}'`
 
-	if [[ "${#si2}" -lt 50 || `wc -l sequences.txt | awk '{print $1}'` -gt 500 ]]; then 
+	if [[ "${#si2}" -lt 50 || `wc -l sequences.txt | awk '{print $1}'` -gt "$myMAX" ]]; then 
 		
 		echo "$i2" >> not_calculated.txt
 

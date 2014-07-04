@@ -3,6 +3,8 @@ mkdir ./tmp
 mkdir ./results
 mkdir ./database
 
+myMAX=$2
+
 touch not_calculated.txt sequences.txt
 cc iupred.c -o iupred
 
@@ -14,7 +16,7 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 
 	si2=`grep -w -m1 "$i2" $1 | awk '(NF==2){print $2}'`
 
-	if [[ "${#si2}" -ge 50 && "${#si2}" -lt 750 && `wc -l sequences.txt | awk '{print $1}'` -le 500 ]]; then
+	if [[ "${#si2}" -ge 50 && "${#si2}" -lt 750 && `wc -l sequences.txt | awk '{print $1}'` -le "$myMAX" ]]; then
 
 		echo ">"$i2 $si2 > input_sequence.oneline
 		echo ">"$i2 > input_sequence.fasta

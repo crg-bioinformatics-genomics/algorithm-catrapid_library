@@ -79,7 +79,7 @@ os.chdir(SCRIPT_PATH)
 
 args.FORMtitle = "".join([t.replace(' ', '_') for t in args.FORMtitle])
 
-command = """ bash runlibrary.sh "{}" "{}" """.format(random_number, onelineFile)
+command = """ bash runlibrary.sh "{}" "{}" "{}" """.format(random_number, onelineFile, args.FORMtitle)
 
 p = subprocess.Popen(command, cwd=SCRIPT_PATH, shell=True)
 p.communicate()
@@ -118,10 +118,12 @@ if p.returncode == 0:
 	# create template from the string
 	t = Template(template_string)
 	
+	myTitle = args.FORMtitle.replace('poweroverwhelming', 'po').replace('gold', 'G').replace('silver', 'S').replace('iron', 'I')
+
 	# context contains variables to be replaced
 	c = Context(
 	   {
-		   "title": args.FORMtitle,
+		   "title": myTitle,
 		   "DatasetA": (""" "{}" """.format(args.fileA[0])).split("/")[5].split("\"")[0],
 		   "randoms" : random_number,
 		   "generated" : str(datetime.datetime.now()),
