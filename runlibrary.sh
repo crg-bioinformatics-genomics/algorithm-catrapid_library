@@ -3,21 +3,23 @@ set -o pipefail
 
 if [[ "$3" == *"gold"* ]]; then
 	ti=`echo "$3" | sed 's/gold/G/g'`
-	ptot=10000
-	rtot=5000
+	ptot=20000
+	rtot=10000
 	cheat="gold"
 elif [[ "$3" == *"silver"* ]]; then
 	ti=`echo "$3" | sed 's/silver/S/g'`
-	ptot=2000
-	rtot=1000
+	ptot=10000
+	rtot=5000
 	cheat="silver"
 elif [[ "$3" == *"iron"* ]]; then
 	ti=`echo "$3" | sed 's/iron/I/g'`
-	ptot=1000
-	rtot=500
+	ptot=2000
+	rtot=1000
 	cheat="iron"
 else
 	ti=`echo "$3"`
+	ptot=500
+	rtot=500
 	cheat="none"
 fi
 
