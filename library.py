@@ -78,9 +78,10 @@ output_handle1.close()
 os.chdir(SCRIPT_PATH)
 
 args.FORMtitle = "".join([t.replace(' ', '_') for t in args.FORMtitle])
-
+args.FORMfragm = "".join([t.replace('[', ']') for t in args.FORMfragm])
+print args.FORMfragm
 command = """ bash runlibrary.sh "{}" "{}" "{}" "{}" """.format(random_number, onelineFile, args.FORMtitle, args.FORMfragm)
-
+print command
 p = subprocess.Popen(command, cwd=SCRIPT_PATH, shell=True)
 p.communicate()
 
