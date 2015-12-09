@@ -33,6 +33,17 @@ form_fields:
         description: Submission label (optional)
         required: No
         type: text
+    -   name: fragm
+        description: <b>Fragmentation mode</b> 
+        type: radio
+        required: Yes                
+        entries:
+            -   title:  none
+                value:  none
+            -   title:  weighted (RNA)
+                value:  weighted
+            -   title:  uniform (protein or RNA)
+                value:  uniform
     -   name: email
         description: Email address (optional, used for notification)
         type: email

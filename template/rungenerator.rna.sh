@@ -9,6 +9,8 @@ touch not_calculated.txt sequences.txt
 # remembers path
 PATH=$PATH\:./bin/ ; export PATH
 
+opt=$3
+
 # run cases one by one
 for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`; do 
 
@@ -22,7 +24,21 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 
 	elif [[ "${#si2}" -gt 1200 ]]; then 
 
-		bash start.fragment.sh "$i2" "$si2" >> "$name".frag.rna.lib
+		if [[ "$opt" == "weighted" ]]; then
+			bash start.fragment.sh "$i2" "$si2" >> "$name".frag.rna.lib	
+		fi
+		
+		if [[ "$opt" == "uniform" ]]; then
+			echo "$i2" "$si2" > outfile2
+			nt=`cat outfile2 | awk '(NR==1){s=length($2)/50; if(s<=25){s=25}   if(s>=750){s=750} print int(s)}'`
+			bash bin/cutter.sh outfile2 $nt > outfile2.fr
+			for fi2 in `cat outfile2.fr | grep -v "#" | awk '{print $1}'`; do 
+				si2=`grep -w $fi2 outfile2.fr | awk '(NF==2){print $2}' | sed 's/T/U/g'`
+				le2=`grep -w $fi2 outfile2.fr | awk '(NF==2){print length($2)}'`
+				bash bin/start.modified.sh "$i2"_"$fi2" "$si2" >> "$name".frag.rna.lib
+				echo "$i2"_"$fi2" "$si2" >> tmp/rna.frags
+			done
+		fi
 		
 		for fr in `awk '{print $1}' "$name.frag.rna.lib" | grep "$i2""_" | uniq`; do
 			grep -m1 -w "$fr" tmp/rna.frags >> "$name".frag.txt
@@ -56,15 +72,12 @@ if [[ -s "$name.rna.lib" ]]; then
 	mv sequences.txt ./outputs/sequences.txt
 fi
 if [[ -s "$name.frag.rna.lib" ]]; then
-		mv "$name".frag.rna.lib ./outputs/library.frag.lib
-		mv "$name".frag.txt ./outputs/sequences.frag.txt
+	mv "$name".frag.rna.lib ./outputs/library.frag.lib
+	mv "$name".frag.txt ./outputs/sequences.frag.txt
 fi
-else
-	touch ./outputs/library.lib
-	touch ./outputs/sequences.txt
-fi
+
 mv not_calculated.txt ./outputs/not_calculated.txt
 
-rm -fr tmp
+#rm -fr tmp
 rm -fr database
 rm -fr results

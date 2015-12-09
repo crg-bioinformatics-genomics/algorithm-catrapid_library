@@ -11,6 +11,8 @@ cc iupred.c -o iupred
 # remembers path
 PATH=$PATH\:./bin/ ; export PATH
 
+opt=$3
+
 # run cases one by one
 for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`; do
 
@@ -56,7 +58,17 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 		fi
 
 	else
-		echo "$i2" >> not_calculated.txt
+		if [[ "$opt" -eq "uniform" ]]; then
+			echo "$i2" "$si2" > outfile
+			pr=`cat outfile | awk '(NR==1){s=length($2)/50; if(s<=25){s=25}  if(s>=375){s=375} print int(s)}'`
+			bash bin/cutter.sh outfile $pr > outfile.fr
+			for fi2 in `cat outfile.fr | grep -v "#" | awk '{print $1}'`; do 
+				si2=`grep -w $fi2 outfile.fr | awk '(NF==2){print $2}'`
+				le2=`grep -w $fi2 outfile.fr | awk '(NF==2){print length($2)}'`
+				bash start.protein.sh "$i2"_"$fi2" "$si2" >> "$name".frag.prot.lib
+			done
+		fi
+
 	fi
 
 done
@@ -64,9 +76,10 @@ done
 if [[ -s "$name.prot.lib" ]]; then
 	mv $name.prot.lib ./outputs/library.lib
 	mv sequences.txt ./outputs/sequences.txt
-else
-	touch ./outputs/library.lib
-	touch ./outputs/sequences.txt
+fi
+if [[ -s "$name.frag.prot.lib" ]]; then
+	mv "$name".frag.prot.lib ./outputs/library.lib
+	mv sequences.txt ./outputs/sequences.txt
 fi
 
 mv not_calculated.txt ./outputs/not_calculated.txt
