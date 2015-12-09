@@ -54,10 +54,11 @@ done
 if [[ -s "$name.rna.lib" ]]; then
 	mv "$name".rna.lib ./outputs/library.lib
 	mv sequences.txt ./outputs/sequences.txt
-	if [[ -s "$name.frag.rna.lib" ]]; then
+fi
+if [[ -s "$name.frag.rna.lib" ]]; then
 		mv "$name".rna.lib ./outputs/library.frag.lib
 		mv "$name".frag.txt ./outputs/sequences.frag.txt
-	fi
+fi
 else
 	touch ./outputs/library.lib
 	touch ./outputs/sequences.txt
