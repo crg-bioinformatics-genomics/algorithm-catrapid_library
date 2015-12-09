@@ -72,8 +72,17 @@ if [[ -s "$name.rna.lib" ]]; then
 	mv sequences.txt ./outputs/sequences.txt
 fi
 if [[ -s "$name.frag.rna.lib" ]]; then
+<<<<<<< HEAD
 	mv "$name".frag.rna.lib ./outputs/library.frag.lib
 	mv "$name".frag.txt ./outputs/sequences.frag.txt
+=======
+	mv "$name".frag.rna.lib ./outputs/library.lib
+	mv "$name".frag.txt ./outputs/sequences.txt
+fi
+else
+	touch ./outputs/library.lib
+	touch ./outputs/sequences.txt
+>>>>>>> 22f627a5fa1da86737a5ef994954e34f8ac0a469
 fi
 
 mv not_calculated.txt ./outputs/not_calculated.txt
