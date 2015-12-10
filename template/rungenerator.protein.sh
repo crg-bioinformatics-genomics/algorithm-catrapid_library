@@ -20,17 +20,17 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 
 	if [[ "${#si2}" -ge 50 && "${#si2}" -lt 750 && `wc -l sequences.txt | awk '{print $1}'` -le "$myMAX" ]]; then
 
-		echo ">"$i2 $si2 > input_sequence.oneline
-		echo ">"$i2 > input_sequence.fasta
-		echo $si2  >> input_sequence.fasta
+# 		echo ">"$i2 $si2 > input_sequence.oneline
+# 		echo ">"$i2 > input_sequence.fasta
+# 		echo $si2  >> input_sequence.fasta
 
-		touch RNAdom.list DNAdom.list
-		hmmscan --cut_ga --noali --domtblout fragmentation.log ../Pfam_hmm/Pfam-A.hmm input_sequence.fasta > hmm_log.txt
-		grep -f "RNAfiltering.list" "fragmentation.log" | awk '{print $4}' | sort -u > RNAdom.list
-		grep -v -f "RNAfiltering.list" "fragmentation.log" | grep -f "RNA-DNAfiltering.list" | awk '{print $4}' | sort -u > DNAdom.list
-#	 	./iupred input_sequence.fasta long | grep -v "#" | awk 'BEGIN{str=""}{str=sprintf("%s%c",str,$2);a[NR]=$2;b[NR]=$3;if($3>0.4){c++}}END{print c/NR}' | awk '($1>0.3){print "'$i2'"}' 
+# 		touch RNAdom.list DNAdom.list
+# 		hmmscan --cut_ga --noali --domtblout fragmentation.log ../Pfam_hmm/Pfam-A.hmm input_sequence.fasta > hmm_log.txt
+# 		grep -f "RNAfiltering.list" "fragmentation.log" | awk '{print $4}' | sort -u > RNAdom.list
+# 		grep -v -f "RNAfiltering.list" "fragmentation.log" | grep -f "RNA-DNAfiltering.list" | awk '{print $4}' | sort -u > DNAdom.list
+# #	 	./iupred input_sequence.fasta long | grep -v "#" | awk 'BEGIN{str=""}{str=sprintf("%s%c",str,$2);a[NR]=$2;b[NR]=$3;if($3>0.4){c++}}END{print c/NR}' | awk '($1>0.3){print "'$i2'"}' 
 
-		if [[ -s "RNAdom.list" || -s "DNAdom.list" ]]; then
+# 		if [[ -s "RNAdom.list" || -s "DNAdom.list" ]]; then
 
 			name=`echo $1 | sed 's/\.txt//g;s/\.oneline//g' | awk '{print $1}'`
 
@@ -51,11 +51,11 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 				echo "$i2" >> not_calculated.txt
 			fi
 			
-			rm RNAdom.list DNAdom.list
+#			rm RNAdom.list DNAdom.list
 			
-		else
-			echo "$i2" >> not_calculated.txt
-		fi
+		# else
+		# 	echo "$i2" >> not_calculated.txt
+		# fi
 
 	else
 		if [[ "$opt" -eq "uniform" ]]; then
@@ -84,6 +84,6 @@ fi
 
 mv not_calculated.txt ./outputs/not_calculated.txt
 
-rm -fr tmp
+#rm -fr tmp
 rm -fr database
 rm -fr results
