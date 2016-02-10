@@ -68,12 +68,12 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 done
 
 if [[ -s "$name.rna.lib" ]]; then
-	mv "$name".rna.lib ./outputs/library.lib
-	mv sequences.txt ./outputs/sequences.txt
+	cat "$name".rna.lib >> ./outputs/library.lib
+	cat sequences.txt >> ./outputs/sequences.txt
 fi
 if [[ -s "$name.frag.rna.lib" ]]; then
-	mv "$name".frag.rna.lib ./outputs/library.lib
-	mv "$name".frag.txt ./outputs/sequences.txt
+	cat "$name".frag.rna.lib >> ./outputs/library.lib
+	cat "$name".frag.txt >> ./outputs/sequences.txt
 fi
 
 mv not_calculated.txt ./outputs/not_calculated.txt

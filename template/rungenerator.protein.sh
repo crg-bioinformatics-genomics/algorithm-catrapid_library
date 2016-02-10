@@ -74,12 +74,12 @@ for i2 in `cat $1 | grep -v "#" | awk '{print $1}' | head -20000 | sed 's/>//g'`
 done
 
 if [[ -s "$name.prot.lib" ]]; then
-	mv $name.prot.lib ./outputs/library.lib
-	mv sequences.txt ./outputs/sequences.txt
+	cat $name.prot.lib >> ./outputs/library.lib
+	cat sequences.txt >> ./outputs/sequences.txt
 fi
 if [[ -s "$name.frag.prot.lib" ]]; then
-	mv "$name".frag.prot.lib ./outputs/library.lib
-	mv sequences.txt ./outputs/sequences.txt
+	cat "$name".frag.prot.lib >> ./outputs/library.lib
+	cat sequences.txt >> ./outputs/sequences.txt
 fi
 
 mv not_calculated.txt ./outputs/not_calculated.txt
