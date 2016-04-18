@@ -57,7 +57,7 @@ file_uploads:
 
 algorithm:
     command:              "library.py -fileA=<file0> -output_dir=<output_dir>"
-    processing_timeout:   7200
+    processing_timeout:   36000
     
 # for the processing part
 output:
